@@ -15,7 +15,7 @@ const casoSchema = z.object({
     required_error: "O campo 'status' é obrigatório.",
     invalid_type_error: "O campo 'status' deve ser 'aberto' ou 'solucionado'.",
   }),
-  agente_id: z.number().int().positive("O 'agente_id' deve ser um número inteiro positivo.")
+  agente_id: z.string().transform((val) => parseInt(val, 10)).pipe(z.number().int().positive("O 'agente_id' deve ser um número inteiro positivo."))
 }).strict();
 
 const casoPatchSchema = casoSchema.partial();

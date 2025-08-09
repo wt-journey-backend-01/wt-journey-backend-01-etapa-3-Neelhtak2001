@@ -8,7 +8,7 @@ exports.up = function(knex) {
       table.increments('id').primary();
       table.string('nome').notNullable();
       table.date('dataDeIncorporacao').notNullable();
-      table.string('cargo').notNullable();
+      table.enum('cargo', ['investigador', 'delegada', 'escrivao']).notNullable(); // ← MUDANÇA
       table.timestamps(true, true);
     })
     .then(() => {
