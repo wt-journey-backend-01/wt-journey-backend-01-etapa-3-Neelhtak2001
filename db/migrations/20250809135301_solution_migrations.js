@@ -11,14 +11,16 @@ exports.up = function(knex) {
       table.string('cargo').notNullable();
       table.timestamps(true, true);
     })
-    .createTable('casos', function (table) {
-      table.increments('id').primary();
-      table.string('titulo').notNullable();
-      table.text('descricao').notNullable();
-      table.enum('status', ['aberto', 'solucionado']).defaultTo('aberto');
-      table.integer('agente_id').unsigned().notNullable();
-      table.foreign('agente_id').references('id').inTable('agentes');
-      table.timestamps(true, true);
+    .then(() => {
+      return knex.schema.createTable('casos', function (table) {
+        table.increments('id').primary();
+        table.string('titulo').notNullable();
+        table.text('descricao').notNullable();
+        table.enum('status', ['aberto', 'solucionado']).defaultTo('aberto');
+        table.integer('agente_id').unsigned().notNullable();
+        table.foreign('agente_id').references('id').inTable('agentes');
+        table.timestamps(true, true);
+      });
     });
 };
 
@@ -27,5 +29,5 @@ exports.up = function(knex) {
  * @returns { Promise<void> }
  */
 exports.down = function(knex) {
-  return knex.schema.dropTable('casos').dropTable('agentes');
+  return knex.schema.dropTable('casos').then(() => knex.schema.dropTable('agentes'));
 };

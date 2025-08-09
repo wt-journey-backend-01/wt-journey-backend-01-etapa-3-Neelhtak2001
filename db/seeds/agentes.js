@@ -11,12 +11,12 @@ exports.seed = async function(knex) {
     {
       nome: 'João Silva',
       dataDeIncorporacao: '2020-01-15',
-      cargo: 'Investigador'
+      cargo: 'investigador' // ← minúscula
     },
     {
       nome: 'Maria Santos',
       dataDeIncorporacao: '2019-03-22', 
-      cargo: 'Delegada'
+      cargo: 'delegada' // ← minúscula
     }
   ]);
 };
